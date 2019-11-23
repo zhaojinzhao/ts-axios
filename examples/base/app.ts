@@ -104,3 +104,27 @@ axios({
     url: '/base/post',
     data: searchParams
 })
+
+// 验证返回值
+axios({
+    method: 'post',
+    url: '/base/post',
+    data: {
+        a: 1,
+        b: 2
+    }
+}).then(res => {
+    console.log(res)
+}).catch()
+
+axios({
+    method: 'post',
+    url: '/base/post',
+    responseType: 'json',
+    data: {
+        a: 3,
+        b: 4
+    }
+}).then(res => {
+    console.log(res)
+}).catch()
