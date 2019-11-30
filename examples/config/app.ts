@@ -38,3 +38,28 @@ axios({
 }).then(res => {
     console.log(res.data)
 }).catch()
+
+// demo: axios.create创建实例化
+const instance = axios.create({
+    transformRequest: [(data => {
+        return qs.stringify(data)
+    }), ...(axios.defaults.transformRequest as AxiosTransformer[])],
+    transformResponse: [
+        ...(axios.defaults.transformResponse as AxiosTransformer[]), data => {
+            if (typeof data === 'object') {
+                data.b = 2
+            }
+            return data
+        }
+    ]
+})
+
+instance({
+    url: '/config/post',
+    method: 'post',
+    data: {
+        a: 1
+    }
+}).then(res => {
+    console.log(res.data)
+}).catch()
